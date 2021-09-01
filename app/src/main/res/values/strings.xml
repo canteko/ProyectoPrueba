@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">MecAround</string>
+    <string name="preferences_file_name">preferencecsMecAround</string>
+    <string name="preferences_email">email</string>
+    <string name="preferences_is_logged_in">isLoggedIn</string>
+    <string name="averia_dialog_title">Nueva avería</string>
+    <string name="averia_dialog_save">Guardar</string>
+    <string name="averia_dialog_cancel">Cancelar</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
