@@ -3,9 +3,12 @@ package com.canteko.mecaround.activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.canteko.mecaround.R;
 import com.canteko.mecaround.databinding.ActivityMainBinding;
@@ -87,5 +90,39 @@ public class MainActivity extends AppCompatActivity implements OnAveriaInteracti
                 realm.copyToRealmOrUpdate(nuevaAveria);
             }
         });
+    }
+
+    @Override
+    public void onAveriaEliminar(AveriaDB averiaDB) {
+        mostrarDialogoEliminar(averiaDB);
+    }
+
+    private void mostrarDialogoEliminar(AveriaDB item) {
+        // Use the Builder class for convenient dialog construction
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Eliminar avería")
+                .setMessage("¿Seguro que deseas eliminar la avería " + item.getTitulo() + "?")
+                .setPositiveButton("Eliminar", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        Realm realm = Realm.getDefaultInstance();
+                        realm.executeTransaction(new Realm.Transaction() {
+                            @Override
+                            public void execute(Realm realm) {
+                                realm.where(AveriaDB.class).equalTo(AveriaDB.AVERIADB_ID, item.getId()).findFirst().deleteFromRealm();
+                                Toast.makeText(getBaseContext(), "Averia Eliminada", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+                        dialog.dismiss();
+                    }
+                })
+                .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.dismiss();
+                    }
+                });
+        // Create the AlertDialog object and return it
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }

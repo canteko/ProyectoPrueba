@@ -91,6 +91,12 @@ public class MyAveriaRecyclerViewAdapter extends RecyclerView.Adapter<MyAveriaRe
             }
         });
 
+        holder.imageViewEliminarAveria.setOnClickListener(v -> {
+            if(null != mListener) {
+                mListener.onAveriaEliminar(holder.mItem);
+            }
+        });
+
     }
 
     @Override
@@ -104,6 +110,7 @@ public class MyAveriaRecyclerViewAdapter extends RecyclerView.Adapter<MyAveriaRe
         public final TextView textViewPresupuestos;
         public final ImageView fotoAveriaDB;
         public final ImageView imageViewEditarAveria;
+        public final ImageView imageViewEliminarAveria;
         public AveriaDB mItem;
 
         public ViewHolder(AveriaItemBinding binding) {
@@ -113,6 +120,7 @@ public class MyAveriaRecyclerViewAdapter extends RecyclerView.Adapter<MyAveriaRe
             textViewPresupuestos = binding.getRoot().findViewById(R.id.textViewPresupuestos);
             fotoAveriaDB = binding.getRoot().findViewById(R.id.imageViewPhoto);
             imageViewEditarAveria = binding.getRoot().findViewById(R.id.imageViewEditarAveria);
+            imageViewEliminarAveria = binding.getRoot().findViewById(R.id.imageViewEliminarAveria);
         }
 
         @Override
