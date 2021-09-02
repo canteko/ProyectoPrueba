@@ -3,6 +3,7 @@ package com.canteko.mecaround.activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -40,7 +41,9 @@ public class MainActivity extends AppCompatActivity implements OnAveriaInteracti
 
     @Override
     public void onAveriaClick(AveriaDB averia) {
-
+        Intent i = new Intent(this, DetalleAveriaActivity.class);
+        i.putExtra(AveriaDB.AVERIADB_ID, averia.getId());
+        startActivity(i);
     }
 
     @Override
